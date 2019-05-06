@@ -3,9 +3,14 @@ import Signup from '../ui/Signup';
 import Link from '../ui/Link';
 import NotFound from '../ui/NotFound';
 import Login from '../ui/Login';
-import "typeface-roboto";
+import history from '../utils/history';
 
 import { Route, Switch } from 'react-router-dom';
+import { Tracker } from 'meteor/tracker';
+import { Meteor } from 'meteor/meteor';
+
+const authenticatedPages = ['/links'];
+const unAuthenticatedPages = ['/', '/signup'];
 
 const routes = (
     <Switch>
@@ -15,6 +20,19 @@ const routes = (
         <Route path='*' component={NotFound} />
     </Switch>
 );
+
+Tracker.autorun(() => {
+    const isAuthenticated = !!Meteor.userId();
+    const pathName = history.location.pathname;
+    const isAuthenticatedPage = authenticatedPages.includes(pathName);
+    const isUnAuthenticatedPage = unAuthenticatedPages.includes(pathName);
+
+    if(isUnAuthenticatedPage && isAuthenticated) {
+        history.push('/links');
+    } else if (isAuthenticatedPage && !isAuthenticated) {
+        history.push('/');
+    }
+});
 
 const App = (props) => {
     return (

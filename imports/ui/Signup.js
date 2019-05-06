@@ -20,10 +20,6 @@ const Signup = (props) => {
         Accounts.createUser({ email, password }, (err) => {
             console.log('Signup callback', err);
         });
-
-        // setMessageState({
-        //     error: 'Something went wrong'
-        // });
     };
 
     return (
