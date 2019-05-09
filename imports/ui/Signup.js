@@ -18,7 +18,15 @@ const Signup = (props) => {
         let password = passwordInputRef.current.value;
 
         Accounts.createUser({ email, password }, (err) => {
-            console.log('Signup callback', err);
+            if (err) {
+                setMessageState({
+                    error: err.reason
+                });
+            } else {
+                setMessageState({
+                    error: ''
+                });
+            }
         });
     };
 
@@ -28,7 +36,7 @@ const Signup = (props) => {
 
             {messageState.error ? <p>{messageState.error}</p> : undefined}
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} noValidate>
                 <input type='email' ref={emailInputRef} name='email' placeholder='Email' />
                 <input type='password' ref={passwordInputRef} name='password' placeholder='Password' />
                 <button type="submit" variant='contained' color='secondary'>Create Account</button>
