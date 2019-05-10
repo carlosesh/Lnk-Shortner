@@ -17,6 +17,12 @@ const Signup = (props) => {
         let email = emailInputRef.current.value;
         let password = passwordInputRef.current.value;
 
+        if(password.length < 9 ) {
+            return setMessageState({
+                error: 'Password must be more than 8 characters long'
+            }); 
+        }
+
         Accounts.createUser({ email, password }, (err) => {
             if (err) {
                 setMessageState({
