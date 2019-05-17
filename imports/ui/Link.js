@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import history from '../utils/history'
+import history from '../utils/history';
+import LinkList from './LinksList';
 
 import { Accounts } from 'meteor/accounts-base';
 import { Links } from '../api/links';
@@ -27,6 +28,9 @@ const Link = (props) => {
     return (
         <div>
             <h1>Your Links</h1>
+            
+            <LinkList/>
+
             <button onClick={onLogout}>Logout</button>
 
             <p>Add link</p>
