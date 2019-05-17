@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import history from '../utils/history'
 
-import {Accounts} from 'meteor/accounts-base';
+import { Accounts } from 'meteor/accounts-base';
+import { Links } from '../api/links';
 
 const Link = (props) => {
 
@@ -10,10 +11,29 @@ const Link = (props) => {
         console.log('User logged out');
     }
 
+    let urlInputRef = useRef();
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        const url = urlInputRef.current.value.trim();
+
+        if (url) {
+            Links.insert({ url });
+            urlInputRef.current.value = '';
+        }
+    };
+
     return (
         <div>
             <h1>Your Links</h1>
             <button onClick={onLogout}>Logout</button>
+
+            <p>Add link</p>
+            <form onSubmit={onSubmit}>
+                <input type='text' ref={urlInputRef} placeholder='url' />
+                <button>Add Link</button>
+            </form>
         </div>
     );
 };

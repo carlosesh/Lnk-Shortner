@@ -14,8 +14,8 @@ const Signup = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        let email = emailInputRef.current.value;
-        let password = passwordInputRef.current.value;
+        let email = emailInputRef.current.value.trim();
+        let password = passwordInputRef.current.value.trim();
 
         if(password.length < 9 ) {
             return setMessageState({
