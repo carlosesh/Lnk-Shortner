@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Links, LinksList as linksMap } from '../api/links';
+import { Links } from '../api/links';
 import { Tracker } from 'meteor/tracker';
 
 const LinksList = (props) => {
@@ -9,21 +9,18 @@ const LinksList = (props) => {
     });
 
     useEffect(() => {
-        console.log('coomponentDidMount LinksList');
-
-        // setLinkState({
-        //     links: linksMap
-        // });
-    });
+        Tracker.autorun(() => {
+            const links = Links.find().fetch();
+            setLinkState({
+                links: links
+            });
+        });
+    }, []);
 
     const renderLinks = () => {
-        let linksList = Links.find().fetch();
-
-        // return linkState.links.map((link) => {
-        //     return (
-        //         <p key={link._id}>{link}</p>
-        //     );
-        // });
+        return linkState.links.map((link) => {
+            return <p key={link._id}>{link.url}</p>
+        });
     };
 
     return (
