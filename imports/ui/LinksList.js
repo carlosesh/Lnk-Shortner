@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Links } from '../api/links';
 import { Tracker } from 'meteor/tracker';
 
@@ -9,12 +10,17 @@ const LinksList = (props) => {
     });
 
     useEffect(() => {
-        Tracker.autorun(() => {
+        linksTracker = Tracker.autorun(() => {
+            Meteor.subscribe('links');
             const links = Links.find().fetch();
             setLinkState({
                 links: links
             });
         });
+
+        return function cleanup() {
+            linksTracker.stop();
+        }
     }, []);
 
     const renderLinks = () => {
