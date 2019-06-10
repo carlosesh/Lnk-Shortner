@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
-import history from '../utils/history'
+import history from '../utils/history';
+import LinkList from './LinksList';
 
 import { Accounts } from 'meteor/accounts-base';
 import { Links } from '../api/links';
+import { Meteor } from 'meteor/meteor';
 
 const Link = (props) => {
 
@@ -19,7 +21,7 @@ const Link = (props) => {
         const url = urlInputRef.current.value.trim();
 
         if (url) {
-            Links.insert({ url });
+            Meteor.call('links.insert', url);
             urlInputRef.current.value = '';
         }
     };
@@ -27,6 +29,9 @@ const Link = (props) => {
     return (
         <div>
             <h1>Your Links</h1>
+            
+            <LinkList/>
+
             <button onClick={onLogout}>Logout</button>
 
             <p>Add link</p>
