@@ -1,15 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import Clipboard from 'clipboard';
 
 const LinkListItem = (props) => {
 
-    let copyRef = useRef();
+    let copy = useRef();
     let clipboard = null;
 
     useEffect(() => {
-        console.log(copyRef.current.dataset.clipboardText.trim());
-        clipboard = new Clipboard(copyRef.current.dataset.clipboardText.trim());
+        clipboard = new Clipboard(copy.current);
 
         clipboard.on('sucess', () => {
             alert("It Worked!");
@@ -27,7 +26,7 @@ const LinkListItem = (props) => {
         <div>
             <p>{props.url}</p>
             <p>{props.shortUrl}</p>
-            <button ref={copyRef} data-clipboard-text={props.shortUrl}>Copy</button>
+            <button ref={copy} data-clipboard-text={props.shortUrl}>Copy</button>
         </div>
     );
 };
