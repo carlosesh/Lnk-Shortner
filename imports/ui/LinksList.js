@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import LinkListItem from './LinkListItem';
+
 import { Meteor } from 'meteor/meteor';
 import { Links } from '../api/links';
 import { Tracker } from 'meteor/tracker';
@@ -25,7 +27,8 @@ const LinksList = (props) => {
 
     const renderLinks = () => {
         return linkState.links.map((link) => {
-            return <p key={link._id}>{link.url}</p>
+            const shortUrl = Meteor.absoluteUrl(link._id);
+            return <LinkListItem key={link._id} shortUrl={shortUrl} {...link} />
         });
     };
 
