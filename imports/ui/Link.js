@@ -1,44 +1,14 @@
-import React, { useRef } from 'react';
-import history from '../utils/history';
+import React from 'react';
 import LinkList from './LinksList';
-
-import { Accounts } from 'meteor/accounts-base';
-import { Links } from '../api/links';
-import { Meteor } from 'meteor/meteor';
+import PrivateHeader from './PrivateHeader';
+import AddLink from './AddLink';
 
 const Link = (props) => {
-
-    const onLogout = () => {
-        Accounts.logout();
-        console.log('User logged out');
-    }
-
-    let urlInputRef = useRef();
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-        const url = urlInputRef.current.value.trim();
-
-        if (url) {
-            Meteor.call('links.insert', url);
-            urlInputRef.current.value = '';
-        }
-    };
-
     return (
         <div>
-            <h1>Your Links</h1>
-            
+            <PrivateHeader title ='Your Links'/>
             <LinkList/>
-
-            <button onClick={onLogout}>Logout</button>
-
-            <p>Add link</p>
-            <form onSubmit={onSubmit}>
-                <input type='text' ref={urlInputRef} placeholder='url' />
-                <button>Add Link</button>
-            </form>
+            <AddLink/>
         </div>
     );
 };
