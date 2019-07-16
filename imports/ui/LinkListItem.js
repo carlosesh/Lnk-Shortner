@@ -1,32 +1,33 @@
-import React, { useRef, useEffect, forwardRef} from 'react';
+import React, { useRef, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import Clipboard from 'clipboard';
 
 const LinkListItem = (props) => {
 
-    let copy = useRef();
-    let clipboard = null;
+    const copyRef = useRef();
+
+    const [copyState, setCopyState] = useState(false);
 
     useEffect(() => {
-        clipboard = new Clipboard(copy.current);
+        let clipboard = new Clipboard(copyRef.current);
 
-        clipboard.on('sucess', () => {
-            alert("It Worked!");
+        clipboard.on('success', () => {
+            setCopyState(true);
+            setTimeout(() => setCopyState(false), 1000);
         }).on('error', () => {
             alert("Unable to Copy, please manually copy the link")
         });
 
         return function cleanup() {
             clipboard.destroy();
-            console.log("clenaup for link list item");
         };
-    }, []);
+    });
 
     return (
         <div>
             <p>{props.url}</p>
             <p>{props.shortUrl}</p>
-            <button ref={copy} data-clipboard-text={props.shortUrl}>Copy</button>
+            <button ref={copyRef} data-clipboard-text={props.shortUrl}>{copyState ? 'Copied' : 'Copy'}</button>
         </div>
     );
 };
