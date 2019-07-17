@@ -6,6 +6,7 @@ import history from "../imports/utils/history";
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
 import { Router } from "react-router";
+import { Session } from 'meteor/session';
 
 const app = (
   <Router history={history}>
@@ -14,6 +15,7 @@ const app = (
 );
 
 Meteor.startup(() => {
+  Session.set('showVisible', true);
   Tracker.autorun(() => {
     ReactDOM.render(app, document.getElementById('app'));
   })
