@@ -4,6 +4,7 @@ import LinkListItem from './LinkListItem';
 import { Meteor } from 'meteor/meteor';
 import { Links } from '../api/links';
 import { Tracker } from 'meteor/tracker';
+import { Session } from 'meteor/session';
 
 const LinksList = (props) => {
 
@@ -14,7 +15,9 @@ const LinksList = (props) => {
     useEffect(() => {
         linksTracker = Tracker.autorun(() => {
             Meteor.subscribe('links');
-            const links = Links.find().fetch();
+            const links = Links.find({
+                visible: Session.get('showVisible')
+            }).fetch();
             setLinkState({
                 links: links
             });
