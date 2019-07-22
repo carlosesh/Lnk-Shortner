@@ -17,10 +17,10 @@ const Signup = (props) => {
         let email = emailInputRef.current.value.trim();
         let password = passwordInputRef.current.value.trim();
 
-        if(password.length < 9 ) {
+        if (password.length < 9) {
             return setMessageState({
                 error: 'Password must be more than 8 characters long'
-            }); 
+            });
         }
 
         Accounts.createUser({ email, password }, (err) => {
@@ -37,17 +37,19 @@ const Signup = (props) => {
     };
 
     return (
-        <div>
-            <h1>Join Short Lnk</h1>
+        <div className="boxed-view">
+            <div className="boxed-view__box">
+                <h1>Join Short Lnk</h1>
 
-            {messageState.error ? <p>{messageState.error}</p> : undefined}
+                {messageState.error ? <p>{messageState.error}</p> : undefined}
 
-            <form onSubmit={onSubmit} noValidate>
-                <input type='email' ref={emailInputRef} name='email' placeholder='Email' />
-                <input type='password' ref={passwordInputRef} name='password' placeholder='Password' />
-                <button type="submit" variant='contained' color='secondary'>Create Account</button>
-            </form>
-            <Link to='/'>Already have an account?</Link>
+                <form onSubmit={onSubmit} noValidate className="boxed-view__form">
+                    <input type='email' ref={emailInputRef} name='email' placeholder='Email' />
+                    <input type='password' ref={passwordInputRef} name='password' placeholder='Password' />
+                    <button type="submit" className="button">Create Account</button>
+                </form>
+                <Link to='/'>Already have an account?</Link>
+            </div>
         </div>
     );
 };

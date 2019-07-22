@@ -9,8 +9,8 @@ const Link = (props) => {
         <div>
             <PrivateHeader title ='Your Links'/>
             <LinksListFilter/>
-            <LinkList/>
             <AddLink/>
+            <LinkList/>
         </div>
     );
 };

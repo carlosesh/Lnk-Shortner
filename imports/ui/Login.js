@@ -17,7 +17,7 @@ const Login = (props) => {
         let email = emailRef.current.value;
         let password = passwordRef.current.value;
 
-        Meteor.loginWithPassword({email}, password, (err) => {
+        Meteor.loginWithPassword({ email }, password, (err) => {
             if (err) {
                 setMessageState({
                     error: 'Unable to login. Check Email and Password'
@@ -31,18 +31,20 @@ const Login = (props) => {
     }
 
     return (
-        <div>
-            <h1>Login to Short Lnk</h1>
+        <div className="boxed-view">
+            <div className="boxed-view__box">
+                <h1>Short Lnk</h1>
 
-            {messageState.error ? <p>{messageState.error}</p> : undefined}
+                {messageState.error ? <p>{messageState.error}</p> : undefined}
 
-            <form onSubmit={onSubmit} noValidate>
-                <input type='email' ref={emailRef} name='email' placeholder='Email'/>
-                <input type='password' ref={passwordRef} name='password' placeholder='Password'/>
-                <button>Login</button>
-            </form>
+                <form onSubmit={onSubmit} noValidate className="boxed-view__form">
+                    <input type='email' ref={emailRef} name='email' placeholder='Email' />
+                    <input type='password' ref={passwordRef} name='password' placeholder='Password' />
+                    <button className="button">Login</button>
+                </form>
 
-            <Link to='/signup'>Have an account?</Link>
+                <Link to='/signup'>Have an account?</Link>
+            </div>
         </div>
     );
 };

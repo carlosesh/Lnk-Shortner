@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Clipboard from 'clipboard';
+import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
 
 const LinkListItem = (props) => {
@@ -24,13 +25,27 @@ const LinkListItem = (props) => {
         };
     });
 
+    const renderStats = () => {
+        const visitMessage = props.visitedCount === 1 ? 'visit' : 'visits';
+        let visitedMessage = null;
+        if(typeof props.lastVisitedAt === 'number') {
+            visitedMessage = `(visited ${ moment(props.lastVisitedAt).fromNow() })`;
+        }
+
+        return <p>{props.visitedCount} {visitMessage} {visitedMessage}</p>
+    };
+
     return (
         <div>
             <p>{props.url}</p>
             <p>{props.shortUrl}</p>
             <p>{props.visible.toString()}</p>
-            <button ref={copyRef} data-clipboard-text={props.shortUrl}>{copyState ? 'Copied' : 'Copy'}</button>
-            <button onClick={() => {
+            {renderStats()}
+            <a className="button button--pill button--link" href={props.shortUrl} target="_blank">
+                Visit
+            </a>
+            <button className="button button--pill" ref={copyRef} data-clipboard-text={props.shortUrl}>{copyState ? 'Copied' : 'Copy'}</button>
+            <button className="button button--pill" onClick={() => {
                 Meteor.call('links.setVisibility', props._id, !props.visible)
             }}>
                 {props.visible ? 'Hide' : 'Unhide'}
@@ -44,7 +59,9 @@ LinkListItem.propTypes = {
     url: PropTypes.string.isRequired,
     userId: PropTypes.string.isRequired,
     visible: PropTypes.bool.isRequired,
-    shortUrl: PropTypes.string.isRequired
+    shortUrl: PropTypes.string.isRequired,
+    visitedCount: PropTypes.number.isRequired,
+    lastVisitedAt: PropTypes.number
 }
 
 export default LinkListItem;
