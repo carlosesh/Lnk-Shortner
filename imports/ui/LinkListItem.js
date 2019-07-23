@@ -32,14 +32,13 @@ const LinkListItem = (props) => {
             visitedMessage = `(visited ${ moment(props.lastVisitedAt).fromNow() })`;
         }
 
-        return <p>{props.visitedCount} {visitMessage} {visitedMessage}</p>
+        return <p className="item__message">{props.visitedCount} {visitMessage} {visitedMessage}</p>
     };
 
     return (
-        <div>
-            <p>{props.url}</p>
-            <p>{props.shortUrl}</p>
-            <p>{props.visible.toString()}</p>
+        <div className="item">
+            <h2>{props.url}</h2>
+            <p className="item__message">{props.shortUrl}</p>
             {renderStats()}
             <a className="button button--pill button--link" href={props.shortUrl} target="_blank">
                 Visit
