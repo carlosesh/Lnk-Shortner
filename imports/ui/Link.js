@@ -7,10 +7,12 @@ import LinksListFilter from './LinksListFilter';
 const Link = (props) => {
     return (
         <div>
-            <PrivateHeader title ='Your Links'/>
-            <LinksListFilter/>
-            <AddLink/>
-            <LinkList/>
+            <PrivateHeader title='Your Links' />
+            <div className="page-content">
+                <LinksListFilter />
+                <AddLink />
+                <LinkList />
+            </div>
         </div>
     );
 };

@@ -21,8 +21,8 @@ const LinksListFilte = (props) => {
 
     return (
         <div>
-            <label>
-                <input type='checkbox' checked={!visibilityState.showVisible} onChange={(e) => {
+            <label className="checkbox">
+                <input className="checkbox__box" type='checkbox' checked={!visibilityState.showVisible} onChange={(e) => {
                     Session.set('showVisible', !e.target.checked);
                 }} />
                 Show hidden Links

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LinkListItem from './LinkListItem';
+import FlipMove from 'react-flip-move';
 
 import { Meteor } from 'meteor/meteor';
 import { Links } from '../api/links';
@@ -29,16 +30,29 @@ const LinksList = (props) => {
     }, []);
 
     const renderLinks = () => {
+        if (linkState.links.length == 0) {
+            return (
+                <div className="item">
+                    <p className="item__status-message">No Links Found</p>
+                </div>
+            )
+        }
+
         return linkState.links.map((link) => {
             const shortUrl = Meteor.absoluteUrl(link._id);
-            return <LinkListItem key={link._id} shortUrl={shortUrl} {...link} />
+            return (
+                <div key={link._id}>
+                    <LinkListItem key={link._id} shortUrl={shortUrl} {...link} />
+                </div>
+            )
         });
     };
 
     return (
         <div>
-            <p>Links List</p>
-            {renderLinks()}
+            <FlipMove maintainContainerHeight={true}>
+                {renderLinks()}
+            </FlipMove>
         </div>
     );
 
