@@ -1,7 +1,4 @@
 export class LoginPage {
-    navigate() {
-        cy.visit('https://less-lnk.herokuapp.com/');
-    }
 
     clickLoginButton() {
         cy.get('.button').click();
@@ -19,5 +16,11 @@ export class LoginPage {
 
     isPresent(textToValidate) {
         cy.contains(textToValidate);
+    }
+
+    loginWithCredentials(user, password) {
+        this.sendKeysToEmailField(user);
+        this.sendKeysToPasswordField(password);
+        this.clickLoginButton();
     }
 }

@@ -1,5 +1,7 @@
 /// <reference types = "cypress" />
 
+import { navigate } from "../../page-objects/Common"
+
 describe('End to End tests for the SignUp Page', function () {
 
     const credentials = [{
@@ -10,7 +12,7 @@ describe('End to End tests for the SignUp Page', function () {
     }];
 
     beforeEach(() => {
-        cy.visit('https://less-lnk.herokuapp.com/');
+        navigate();
         cy.contains('Short Lnk');
         cy.contains('Need an account?').should('have.attr', 'href', '/signup').click();
         cy.url().should('include', '/signup')

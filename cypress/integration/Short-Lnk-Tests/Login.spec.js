@@ -1,6 +1,7 @@
 /// <reference types = "cypress" />
 
 import { LoginPage } from "../../page-objects/LoginPage";
+import { navigate } from "../../page-objects/Common"
 
 describe('End to End tests for the Login Page', function () {
 
@@ -19,7 +20,7 @@ describe('End to End tests for the Login Page', function () {
     }];
 
     beforeEach(() => {
-        loginPage.navigate();
+        navigate();
         loginPage.isPresent('Short Lnk');
         cy.url().should('not.include', '/signup');
     });
@@ -51,9 +52,8 @@ describe('End to End tests for the Login Page', function () {
     });
 
     it('should Login with valid credentials', function () {
-        loginPage.sendKeysToEmailField(credentials[0].validCredentials.user)
-        loginPage.sendKeysToPasswordField(credentials[0].validCredentials.password)
-        loginPage.clickLoginButton();
+        loginPage.loginWithCredentials(credentials[0].validCredentials.user,
+            credentials[0].validCredentials.password);
         cy.get('.header__title').should('have.text', 'Your Links');
     });
 });
