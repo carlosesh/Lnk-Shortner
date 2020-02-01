@@ -19,8 +19,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
-        npm ci
         curl https://install.meteor.com/ | sh
+        npm ci
         npm install
         npm test
       env:
