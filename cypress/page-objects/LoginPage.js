@@ -4,6 +4,10 @@ export class LoginPage {
         cy.get('.button').click();
     }
 
+    clickNeedAnAccount() {
+        cy.contains('Need an account?').should('have.attr', 'href', '/signup').click();
+    }
+
     sendKeysToEmailField(content) {
         return cy.get('[name="email"]').should('have.attr', 'name', 'email')
             .type(content)

@@ -1,3 +1,7 @@
 {
-    "video": false
+    "video": false,
+    "testFiles": [
+        "Short-Lnk-Tests/SetupData/*.js",
+        "Short-Lnk-Tests/*.js"
+      ]
 }

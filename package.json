@@ -4,7 +4,7 @@
   "scripts": {
     "start": "meteor run",
     "start-server": "npm start",
-    "test": "start-server-and-test start-server http://localhost:3000 cypress:run",
+    "test": "start-server-and-test start-server http://localhost:3000/ cypress:run",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open"
   },
@@ -27,8 +27,5 @@
   },
   "engines": {
     "node": "8.15.1"
-  },
-  "devDependencies": {
-    "jest": "^25.1.0"
   }
 }
