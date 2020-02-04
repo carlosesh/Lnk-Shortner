@@ -6,12 +6,15 @@
     "start-server": "npm start",
     "test": "start-server-and-test start-server http://localhost:3000/ cypress:run",
     "cypress:run": "cypress run",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "meteor:test": "meteor test --driver-package meteortesting:mocha --once",
+    "test-watch-browser": "meteor test --driver-package meteortesting:mocha"
   },
   "dependencies": {
     "@babel/runtime": "^7.3.4",
     "clipboard": "^2.0.4",
     "cypress": "^3.6.1",
+    "expect": "^25.1.0",
     "meteor-node-stubs": "^0.4.1",
     "moment": "^2.24.0",
     "react": "^16.8.6",
