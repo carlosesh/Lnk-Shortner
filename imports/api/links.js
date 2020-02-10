@@ -8,9 +8,11 @@ import '../startup/simple-schema-configuration.js';
 export const Links = new Mongo.Collection('links');
 
 if (Meteor.isServer) {
-    Meteor.publish('links', function () {
-        return Links.find({ userId: this.userId });
-    });
+    Meteor.publish('links', publishLinks);
+}
+
+export function publishLinks() {
+    return Links.find({ userId: this.userId });
 }
 
 export function linksInsert(url) {
