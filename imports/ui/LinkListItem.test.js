@@ -41,7 +41,7 @@ if (Meteor.isTest) {
         })
 
         it('Should be visible and button should change to Hide', function () {
-            const wrapper = shallow(<LinkListItem url="www.google.com" shortUrl="localhost:3000/AbCdE" visible="true"/>);
+            const wrapper = shallow(<LinkListItem url="www.google.com" shortUrl="localhost:3000/AbCdE" visible={true} />);
             const buttonText = wrapper.find('button').last().text();
 
             expect(buttonText).toBe('Hide');
@@ -54,18 +54,32 @@ if (Meteor.isTest) {
             expect(buttonText).toBe('Unhide');
         })
 
-        it('Should change to Visits when the visit prop is equal or greater than 1', function () {
-            const wrapper = shallow(<LinkListItem url="www.google.com" shortUrl="localhost:3000/AbCdE" visible="true" visitedCount="0"/>);
+        it('Should remain as visits when the visit prop is equal to 0', function () {
+            const wrapper = shallow(<LinkListItem url="www.google.com" shortUrl="localhost:3000/AbCdE" visible={true} visitedCount={0}/>);
             const pText = wrapper.find('p').last().text();
 
             expect(pText).toBe('0 visits ');
         })
 
         it('Should change to Visits when the visit prop is equal or greater than 1', function () {
-            const wrapper = shallow(<LinkListItem url="www.google.com" shortUrl="localhost:3000/AbCdE" visible="true" visitedCount="1"/>);
+            const wrapper = shallow(<LinkListItem url="www.google.com" shortUrl="localhost:3000/AbCdE" visible={true} visitedCount={1}/>);
             const pText = wrapper.find('p').last().text();
 
-            expect(pText).toBe('1 visits ');
+            expect(pText).toBe('1 visit ');
+        })
+
+        it('Should change to Visits when the visit prop is 2 or greater', function () {
+            const wrapper = shallow(<LinkListItem url="www.google.com" shortUrl="localhost:3000/AbCdE" visible={true} visitedCount={2}/>);
+            const pText = wrapper.find('p').last().text();
+
+            expect(pText).toBe('2 visits ');
+        })
+
+        it('Should render lastVisitedAt when provided as a property', function () {
+            const wrapper = shallow(<LinkListItem url="www.google.com" shortUrl="localhost:3000/AbCdE" visible={true} visitedCount={2} lastVisitedAt={1}/>);
+            const pText = wrapper.find('p').last().text();
+
+            expect(pText).toBe('2 visits (visited 50 years ago)');
         })
         
     })
