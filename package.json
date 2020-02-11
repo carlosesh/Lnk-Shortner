@@ -7,7 +7,7 @@
     "test": "start-server-and-test start-server http://localhost:3000/ cypress:run",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
-    "meteor:test": "meteor test --driver-package meteortesting:mocha --once",
+    "meteor:test": "meteor test TEST_BROWSER_DRIVER=chrome --once --driver-package meteortesting:mocha",
     "test-watch-browser": "meteor test --driver-package meteortesting:mocha"
   },
   "dependencies": {
@@ -30,5 +30,15 @@
   },
   "engines": {
     "node": "8.15.1"
+  },
+  "devDependencies": {
+    "canvas": "^2.6.1",
+    "chromedriver": "^80.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jsdom": "^16.0.0",
+    "jsdom-global": "^3.0.0",
+    "react-addons-test-utils": "^15.6.2",
+    "selenium-webdriver": "^4.0.0-alpha.5"
   }
 }
