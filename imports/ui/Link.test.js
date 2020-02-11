@@ -4,7 +4,6 @@ import expect from 'expect'
 import { shallow } from 'enzyme';
 
 import Link from './Link';
-import PrivateHeader from './PrivateHeader'
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
