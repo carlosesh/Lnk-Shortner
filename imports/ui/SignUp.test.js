@@ -11,13 +11,22 @@ Enzyme.configure({ adapter: new Adapter() });
 
 if (Meteor.isTest) {
 
+    let wrapper;
+
+    before(function () {
+        wrapper = shallow(<Signup />);
+    });
+
     describe('Signup', function () {
-        it('Should render Signup Page', function () {
-            const wrapper = shallow(<Signup />);
+        it('Should render Signup Page and Create Account Button', function () {
             const buttonText = wrapper.find('button').text();
+            
+            expect(buttonText).toBe('Create Account');
+        })
+
+        it('Should render Signup Page and it\'s proper header', function () {
             const joinShortLinkText = wrapper.find('h1').text();
 
-            expect(buttonText).toBe('Create Account');
             expect(joinShortLinkText).toBe('Join Short Lnk');
         })
     })
