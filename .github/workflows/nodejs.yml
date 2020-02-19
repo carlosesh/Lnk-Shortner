@@ -21,6 +21,7 @@ jobs:
       run: |
         npm ci
         npm install
-        npm test
+        curl https://install.meteor.com/ | sh
+        npm run meteor:test
       env:
         CI: true
